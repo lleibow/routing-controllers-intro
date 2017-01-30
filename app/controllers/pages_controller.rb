@@ -17,16 +17,22 @@ class PagesController < ApplicationController
   end
 
   def kitten
-    set_kitten_url
   end
 
   def kittens
-    set_kitten_url
   end
 
   def set_kitten_url
     requested_size = params[:size]
     @kitten_url = "http://lorempixel.com/#{requested_size}/#{requested_size}/cats"
+  end
+
+  def secrets
+    if "squanchy" == params[:magic_word]
+      "/secrets/boobs"
+    else flash[:alert] = "Nuh-uh cutie, try again"
+      redirect_to "/"
+    end
   end
 
 end
